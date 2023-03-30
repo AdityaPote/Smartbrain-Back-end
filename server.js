@@ -25,23 +25,23 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
+app.get("/api/", (req, res) => {
   res.send("its working");
 });
 
-app.post("/signin", (req, res) => {
+app.post("/api/signin", (req, res) => {
   signin.handleSignin(req, res, db, bcrypt);
 });
-app.post("/register", (req, res) => {
+app.post("/api/register", (req, res) => {
   register.handleRegister(req, res, db, bcrypt);
 });
-app.get("/profile/:id", (req, res) => {
+app.get("/api/profile/:id", (req, res) => {
   profile.handleProfile(req, res, db);
 });
-app.put("/image", (req, res) => {
+app.put("/api/image", (req, res) => {
   image.handleImage(req, res, db);
 });
-app.post("/imageurl", (req, res) => {
+app.post("/api/imageurl", (req, res) => {
   image.handleApiCall(req, res);
 });
 
