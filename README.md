@@ -1,6 +1,6 @@
 # Smart Brain Web App
 
-Face Detection Web App created with PERN stack.<br>
+Face Detection Web App created with MERN stack.<br>
 The hosted version can be found [HERE](https://smartbrains-api.onrender.com/api).
 
 ## Functionality
@@ -12,14 +12,13 @@ and the app will display rectangles around all detected faces in the picture.
 
 Front-end: React<br>
 Back-end: Node.js & Express.js<br>
-Database: PostgreSQL<br>
+Database: MongoDB<br>
 
 ## Frameworks
 
 1. Clarifai API
 2. bcrypt-nodejs
-3. Knex
-4. Pg
+3. Mongoose
 5. Tachyons
 6. Serve
 7. Cors
@@ -70,4 +69,4 @@ Or you can Register using a fake email/password.<br><br> 2. Afterwards, you need
 
 ## Hosted Version
 
-The latest version is deployed and hosted on Heroku. Check it out by clicking [HERE](https://smart-brain--face-detect.herokuapp.com/).
+The latest version is deployed and hosted on Heroku. Check it out by clicking [HERE](https://aditya-facedetection.netlify.app/).
