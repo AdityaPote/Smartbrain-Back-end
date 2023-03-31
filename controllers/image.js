@@ -3,12 +3,18 @@ const User = require("../models/UserModel");
 
 //You must add your own API key here from Clarifai.
 const app = new Clarifai.App({
-  apiKey: "a44beaf20a154527b2037ef68b4ccc3f",
+  apiKey: process.env.API_CLARIFAI,
 });
 
 const handleApiCall = (req, res) => {
   app.models
-    .predict(Clarifai.FACE_DETECT_MODEL, req.body.input)
+    .predict(
+      {
+        id: "a403429f2ddf4b49b307e318f00e528b",
+        version: "34ce21a40cc24b6b96ffee54aabff139",
+      },
+      req.body.input
+    )
     .then((data) => {
       res.json(data);
     })
