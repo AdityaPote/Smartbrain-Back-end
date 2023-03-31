@@ -1,7 +1,7 @@
 # Smart Brain Web App
 
 Face Detection Web App created with PERN stack.<br>
-The hosted version can be found [HERE](https://smart-brain--face-detect.herokuapp.com/).
+The hosted version can be found [HERE](https://smartbrains-api.onrender.com/api).
 
 ## Functionality
 
