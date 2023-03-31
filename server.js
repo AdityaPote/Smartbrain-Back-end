@@ -2,45 +2,37 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt-nodejs");
 const cors = require("cors");
-const knex = require("knex");
 require("dotenv").config();
 
 const signin = require("./controllers/signin");
 const register = require("./controllers/register");
-const profile = require("./controllers/profile");
 const image = require("./controllers/image");
 
-const db = knex({
-  client: "pg",
-  connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  },
-});
+const { connectDB } = require("./config/db");
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 
+connectDB();
+
 app.get("/api/", (req, res) => {
   res.send("its working");
 });
 
 app.post("/api/signin", (req, res) => {
-  signin.handleSignin(req, res, db, bcrypt);
+  signin.handleSignin(req, res, bcrypt);
 });
+
 app.post("/api/register", (req, res) => {
-  register.handleRegister(req, res, db, bcrypt);
+  register.handleRegister(req, res, bcrypt);
 });
-app.get("/api/profile/:id", (req, res) => {
-  profile.handleProfile(req, res, db);
-});
+
 app.put("/api/image", (req, res) => {
-  image.handleImage(req, res, db);
+  image.handleImage(req, res);
 });
+
 app.post("/api/imageurl", (req, res) => {
   image.handleApiCall(req, res);
 });

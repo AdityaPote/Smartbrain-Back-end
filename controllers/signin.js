@@ -1,27 +1,25 @@
+const User = require("../models/UserModel");
 
-const handleSignin = (req, res, db, bcrypt) => {
-	const { email, password } = req.body;
-	if (!email || !password) {
-		return res.status(400).json('incorrect form submission');
-	}
-	db.select('email', 'hash').from('login')
-	.where('email', '=', email)
-	.then( data => {
-		const isValid = bcrypt.compareSync(password,data[0].hash);
-		if (isValid) {
-			return db.select('*').from('users')
-			.where('email', '=', email)
-			.then(user => {
-				res.json(user[0])
-			})
-			.catch(err => res.status(400).json('unable to get user'))
-		} else {
-			res.status(400).json('wrong credentials')
-		}
-	})
-	.catch(err => res.status(400).json('wrong credentials'))
-}
+const handleSignin = async (req, res, bcrypt) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      throw new Error("Enter all fields");
+    }
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw new Error("Email not found");
+    }
+    const isValid = bcrypt.compareSync(password, user.hash);
+    if (!isValid) {
+      throw new Error("Invalid password");
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 module.exports = {
-	handleSignin
+  handleSignin,
 };
